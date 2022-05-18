@@ -1,15 +1,16 @@
 const router = require('express').Router();
-const { Tag, Product, ProductTag } = require('../models');
+const { Tag, Product, ProductTag } = require('../../models');
 
 router.get('/', (req, res) => {
-  Tag.findAll({
+ 
+ Tag.findAll({
     include: [
-      {
+     {
         model: Product,
-        through: ProductTag,
+         through: ProductTag,
       },
-    ],
-  })
+     ],
+     })
     .then((tags) => res.status(200).json(tags))
     .catch((err) => res.status(500).json(err));
 });
